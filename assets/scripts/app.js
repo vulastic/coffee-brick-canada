@@ -10,11 +10,12 @@ window.addEventListener("DOMContentLoaded", function() {
       
       let forward, backward;
       let timerId, timerInterval = 3000;
-      let spin = (funcDirection) => {
+      let spin = (direction) => {
+        direction();
+        carousel.last = direction;
         autoplay && this.clearInterval(timerId);
-        funcDirection();
         if (autoplay) {
-          timerId = this.setInterval(funcDirection, timerInterval);
+          timerId = this.setInterval(direction, timerInterval);
         }
       }
       
@@ -68,8 +69,19 @@ window.addEventListener("DOMContentLoaded", function() {
       }
       carousel.getElementsByClassName("next")[0].addEventListener("click", () => { spin(forward); });
       carousel.getElementsByClassName("prev")[0].addEventListener("click", () => { spin(backward); });
+
+      // Start autoplay and interection observer
       if (autoplay) {
-        timerId = this.setInterval(forward, timerInterval);
+        const observer = new IntersectionObserver(entries => {
+          if (entries[0].isIntersecting) {
+            if (!carousel.last) {
+              carousel.last = forward;
+            }
+            timerId = this.setInterval(carousel.last, timerInterval);
+          }
+          else { autoplay && this.clearInterval(timerId); }
+        });
+        observer.observe(carousel);
       }
     }
   }

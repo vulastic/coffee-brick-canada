@@ -40,6 +40,7 @@ img {
   height: 100%;
   object-fit: cover;
 }
+
 /*
     carousel
 */
@@ -117,3 +118,6 @@ img {
   -moz-transition: opacity 0.5s linear;
   transition: opacity 0.5s linear;
 }
+/*
+  end of carousel
+*/
