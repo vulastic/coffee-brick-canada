@@ -8,42 +8,53 @@ window.addEventListener("DOMContentLoaded", function() {
       const list = container.getElementsByTagName("li");
       const autoplay = carousel.classList.contains("autoplay");
       
+      let forward, backward;
       let timerId, timerInterval = 3000;
-      let prev, next;
+      let spin = (funcDirection) => {
+        autoplay && this.clearInterval(timerId);
+        funcDirection();
+        if (autoplay) {
+          timerId = this.setInterval(funcDirection, timerInterval);
+        }
+      }
+      
+      // switch mode
       if (carousel.classList.contains('switch')) {
         let prevIndex = 0;
         let currentIndex = 0;
-        const fadeTransition = (element, opacity, animation) => {
+        const fadeTransition = (element, opacity) => {
           element.style.opacity = opacity;
-          element.classList.add(animation);
+          element.classList.add("fade-transition");
           this.setTimeout(() => {
-            element.classList.remove(animation);
+            element.classList.remove("fade-transition");
           }, 500);
         }
-        prev = () => {
-          autoplay && this.clearTimeout(timerId);
-          prevIndex = currentIndex;
-          currentIndex = (currentIndex - 1 + list.length) % list.length;
-          fadeTransition(list[prevIndex], 0, "fade-transition");
-          fadeTransition(list[currentIndex], 1, "fade-transition");
-          if (autoplay) {
-            timerId = this.setTimeout(prev, timerInterval);
-          }
-        }
-        next = () => {
-          autoplay && this.clearTimeout(timerId);
+        forward = () => {
           prevIndex = currentIndex;
           currentIndex = (currentIndex + 1) % list.length;
-          fadeTransition(list[prevIndex], 0, "fade-transition");
-          fadeTransition(list[currentIndex], 1, "fade-transition");
-          if (autoplay) {
-            timerId = this.setTimeout(next, timerInterval);
-          }
+          fadeTransition(list[prevIndex], 0);
+          fadeTransition(list[currentIndex], 1);
+        }
+        backward = () => {
+          prevIndex = currentIndex;
+          currentIndex = (currentIndex - 1 + list.length) % list.length;
+          fadeTransition(list[prevIndex], 0);
+          fadeTransition(list[currentIndex], 1);
         }
       }
+
+      // slide mode
       else {
-        prev = () => {
-          autoplay && this.clearTimeout(timerId);
+        forward = () => {
+          container.classList.add("sliding-transition");
+          container.style.transform = "translateX(-100%)";
+          this.setTimeout(() => {
+            container.appendChild(list[0]);
+            container.classList.remove("sliding-transition");
+            container.style.transform = "";
+          }, 500);
+        }
+        backward = () => {
           container.insertBefore(list[list.length - 1], container.firstChild);
           container.style.transform = "translateX(-100%)";
           this.setTimeout(() => {
@@ -53,28 +64,12 @@ window.addEventListener("DOMContentLoaded", function() {
           this.setTimeout(() => {
             container.classList.remove("sliding-transition");
           }, 490);
-          if (autoplay) {
-            timerId = this.setTimeout(prev, timerInterval);
-          }
-        }
-        next = () => {
-          autoplay && this.clearTimeout(timerId);
-          container.classList.add("sliding-transition");
-          container.style.transform = "translateX(-100%)";
-          this.setTimeout(() => {
-            container.appendChild(list[0]);
-            container.classList.remove("sliding-transition");
-            container.style.transform = "";
-          }, 500);
-          if (autoplay) {
-            timerId = this.setTimeout(next, timerInterval);
-          }
         }
       }
-      carousel.getElementsByClassName("prev")[0].addEventListener("click", prev);
-      carousel.getElementsByClassName("next")[0].addEventListener("click", next);
+      carousel.getElementsByClassName("next")[0].addEventListener("click", () => { spin(forward); });
+      carousel.getElementsByClassName("prev")[0].addEventListener("click", () => { spin(backward); });
       if (autoplay) {
-        timerId = this.setTimeout(next, timerInterval);
+        timerId = this.setInterval(forward, timerInterval);
       }
     }
   }
