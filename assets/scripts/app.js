@@ -5,16 +5,16 @@ window.addEventListener("DOMContentLoaded", function() {
     const carousel = this.document.getElementById("carousel") || {}; 
     if (carousel) {
       const container = carousel.getElementsByClassName("carousel-container")[0];
-      const list = container.getElementsByTagName("li");
       const autoplay = carousel.classList.contains("autoplay");
+      const list = container.getElementsByTagName("li");
       
       let forward, backward;
       let timerId, timerInterval = 3000;
       let spin = (direction) => {
         direction();
-        carousel.last = direction;
         autoplay && this.clearInterval(timerId);
         if (autoplay) {
+          carousel.direction = direction;
           timerId = this.setInterval(direction, timerInterval);
         }
       }
@@ -74,10 +74,10 @@ window.addEventListener("DOMContentLoaded", function() {
       if (autoplay) {
         const observer = new IntersectionObserver(entries => {
           if (entries[0].isIntersecting) {
-            if (!carousel.last) {
-              carousel.last = forward;
+            if (!carousel.direction) {
+              carousel.direction = forward;
             }
-            timerId = this.setInterval(carousel.last, timerInterval);
+            timerId = this.setInterval(carousel.direction, timerInterval);
           }
           else { autoplay && this.clearInterval(timerId); }
         });
