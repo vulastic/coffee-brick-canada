@@ -8,9 +8,12 @@ window.addEventListener("DOMContentLoaded", function() {
       const autoplay = carousel.classList.contains("autoplay");
       const list = container.getElementsByTagName("li");
       
-      let forward, backward;
-      let timerId, timerInterval = 3000;
-      let spin = (direction) => {
+      let timerId, forward, backward;
+
+      const defaultInterval = 3000;
+      const timerInterval = carousel.dataset.interval != undefined ? carousel.dataset.interval : defaultInterval;
+      
+      const spin = (direction) => {
         direction();
         autoplay && this.clearInterval(timerId);
         if (autoplay) {
@@ -83,6 +86,28 @@ window.addEventListener("DOMContentLoaded", function() {
         });
         observer.observe(carousel);
       }
+    }
+  }
+
+  // scrolly
+  const header = this.document.getElementById("header");
+  if (header) {
+    const offset = header.offsetHeight;
+    const list = this.document.getElementsByClassName("scrolly");
+    for (let item of list) {
+      item.addEventListener("click", () => {
+        let top = item.offsetTop;
+        if (item.dataset.target) {
+          const target = this.document.getElementById(item.dataset.target);
+          if (target) {
+            top = target.offsetTop;
+          }
+        }
+        this.window.scrollTo({
+          top: top - offset,
+          behavior: 'smooth'
+        });
+      });
     }
   }
 });

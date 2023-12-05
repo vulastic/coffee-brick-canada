@@ -5,6 +5,23 @@
     author: vulastic
 */
 
+/*
+    set root
+*/
+:root {
+  --sienna: #B68D40;
+  --aztec: #122620;
+  --ivory: #F4EBD0;
+  --tacha: #D6AD60;
+  --font-family-cursive: 'Kaushan Script', cursive;
+  --font-family-bold: 'Josefin Sans', 'IBM Plex Sans KR', sans-serif;
+  --font-family-text: 'Poppins', 'IBM Plex Sans KR', sans-serif;
+}
+
+
+/*
+    init html components
+*/
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
@@ -21,11 +38,19 @@ section, summary, time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;}
+	vertical-align: baseline;
+}
 
+
+/*
+    set html component
+*/
 body {
   -ms-overflow-style: none;
+  background-color: var(--aztec);
+  font-family: var(--font-family-text);
 }
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -41,15 +66,62 @@ img {
   object-fit: cover;
 }
 
+h1 {
+  font-family: var(--font-family-bold);
+  font-weight: bold;
+  font-size: 2.7em;
+  color: white;
+  margin-block-end: 0.83em;
+}
+
+p {
+  color: white;
+}
+
+/*
+    general
+*/
+.container {
+  z-index: 10;
+}
+
+.cursive {
+  font-family: var(--font-family-cursive);
+  font-size: 2.7em;
+  color: var(--sienna);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.button {
+  border: 1px solid var(--sienna);
+  border-radius: 5px;
+  background-color: var(--sienna);
+  color: white;
+  font-family: var(--font-family-bold);
+  font-size: 0.6em;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color: transparent;
+}
+
 /*
     carousel
 */
 .carousel {
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: relative;
   overflow: hidden;
-  background-color: black;
 }
 
 .carousel .carousel-container {
@@ -57,7 +129,6 @@ img {
   display: flex;
   list-style: none;
   scroll-behavior: smooth;
-  z-index: 1;
 }
 
 .carousel-container > li {
@@ -73,6 +144,15 @@ img {
 
 .carousel.switch .carousel-container > li:nth-child(1) {
   opacity: 1;
+}
+
+.carousel-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
 }
 
 .carousel-arrow {
@@ -121,3 +201,32 @@ img {
 /*
   end of carousel
 */
+
+
+/*
+  sections - home
+*/
+#home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+#home .container span {
+  line-height: 1.8;
+}
+
+#home .container h1 {
+  margin-block-end: 24px;
+}
+
+#home .container p {
+  margin-block-end: 128px;
+}
+
+#home .button {
+  position: absolute;
+  bottom: 10vh;
+  z-index: 1;
+}
