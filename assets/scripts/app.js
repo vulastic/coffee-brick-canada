@@ -89,23 +89,53 @@ window.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // scrolly
+  // header
   const header = this.document.getElementById("header");
   if (header) {
-    const offset = header.offsetHeight;
-    const list = this.document.getElementsByClassName("scrolly");
-    for (let item of list) {
-      item.addEventListener("click", () => {
-        let top = item.offsetTop;
-        if (item.dataset.target) {
-          const target = this.document.getElementById(item.dataset.target);
-          if (target) {
-            top = target.offsetTop;
+    
+    // header scrolled
+    const headerScrolled = () => {
+      if (this.window.scrollY > header.offsetHeight) {
+        header.classList.add("header-scrolled");
+      }
+      else {
+        header.classList.remove("header-scrolled");
+      }
+    }
+    this.document.addEventListener("scroll", headerScrolled);
+
+    // navbar
+    const navbar = this.document.getElementById("navbar");
+    if (navbar) {
+      const links = this.document.getElementsByClassName("nav-item");
+      const navAction = () => {
+        const position = window.scrollY + header.offsetHeight + 1;
+        for (let link of links) {
+          if (!link.hash) continue;
+          let target = this.document.getElementById(link.hash.substring(1));
+          if (!target) continue;
+          if (position >= target.offsetTop && position <= (target.offsetTop + target.offsetHeight)) {
+            link.classList.add("active");
           }
-        }
+          else {
+            link.classList.remove("active");
+          }
+        } 
+      };
+      this.document.addEventListener("scroll", navAction);
+    }
+
+    // scrolly
+    const scrolls = this.document.getElementsByClassName("scrolly");
+    for (let item of scrolls) {
+      if (!item.hash) continue;
+      const target = this.document.getElementById(item.hash.substring(1));
+      if (!target) continue;
+      item.addEventListener("click", e => {
+        e.preventDefault();
         this.window.scrollTo({
-          top: top - offset,
-          behavior: 'smooth'
+          top: target.offsetTop - header.offsetHeight,
+          behavior: "smooth"
         });
       });
     }

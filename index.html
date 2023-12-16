@@ -25,11 +25,23 @@
   </head>
   <body>
     <!-- Header -->
-    <header id="header"></header>
+    <header id="header" class="fixed-top">
+      <a class="brand" href="#"><img src="images/logo.svg"></a>
+      <nav id="navbar">
+        <ul>
+          <li><a class="nav-item scrolly active" href="#home">HOME</a></li>
+          <li><a class="nav-item scrolly" href="#story">STORY</a></li>
+          <li><a class="nav-item scrolly" href="#photo">PHOTO</a></li>
+          <li><a class="nav-item scrolly" href="#history">HISTORY</a></li>
+          <li><a class="nav-item scrolly" href="#about">ABOUT</a></li>
+          <li><a class="nav-item scrolly" href="#contact">CONTACT</a></li>
+        </ul>
+      </nav>
+    </header>
 
     <!-- Main -->
     <section id="home">
-      <div class="carousel switch autoplay" data-interval="3000" id="carousel">
+      <div class="carousel switch" data-interval="3000" id="carousel">
         <button class="carousel-arrow prev">&#8249;</button>
         <button class="carousel-arrow next">&#8250;</button>
         <div class="carousel-overlay"></div>
@@ -47,7 +59,7 @@
         <h1>COFFEE BRICK</h1>
         <p>The best Korean style cafe in Waterloo</p>
       </div>
-      <a class="button scrolly" data-target="story" href="#">FIND MORE</a>
+      <a class="button scrolly" href="#story">FIND MORE</a>
     </section>
 
     <!-- Story -->
@@ -56,12 +68,12 @@
     </section>
 
     <!-- Instagram -->
-    <section style="background-color:lightgreen">
+    <section id="photo" style="background-color:lightgreen">
       <h1>Instagram</h1>
     </section>
 
     <!-- History -->
-    <section style="background-color:lightsalmon">
+    <section id="history" style="background-color:lightsalmon">
       <h1>History</h1>
     </section>
 
@@ -71,7 +83,7 @@
     </section>
 
     <!-- Contact -->
-    <section style="background-color:green">
+    <section id="contact" style="background-color:green">
       <h1>Contact</h1>
     </section>
 
