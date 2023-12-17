@@ -1,95 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Style sheet -->
-    <link rel="stylesheet" href="assets/css/main.css" />
-
-    <!-- Title meta tags -->
-    <title>Coffee Brick</title>
     <meta charset="utf=8">
-    <meta name="description" content="Coffee Brick">
-    <meta name="author" content="Coffee Brick">
-    <meta name="keywards" contents="We rost coffee">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <title>Coffee Brick</title>
+    <meta property="og:title" content="Coffee Brick">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
-
+    <!-- Style sheet -->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/icon.css" />
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Josefin+Sans&family=Kaushan+Script&family=Poppins&display=swap" rel="stylesheet">
-
     <!-- Scripts -->
     <script src="assets/scripts/app.js" type="text/javascript"></script>
   </head>
+
   <body>
+    <!-- Topbar -->
+    <div id="topbar" class="topbar">
+      <ul class="topbar-info">
+        <li><i class="icon-phone"></i>+1 000-0000-0000</li>
+        <li><i class="icon-clock"></i>Mon-Sat: 11 AM - 23 PM</li>
+      </ul>
+      <ul class="topbar-language">
+        <li><a class="topbar-language--active" href="#">En</a></li>
+        <li>|</li>
+        <li><a href="./ko/">한국어</a></li>
+      </ul>
+    </div>
+
     <!-- Header -->
-    <header id="header" class="fixed-top">
-      <a class="brand" href="#"><img src="images/logo.svg"></a>
-      <nav id="navbar">
+    <header id="header" class="header">
+      <a class="header-brand" href="#"><img src="./images/brand.svg"></a>
+      <nav class="header-navbar">
         <ul>
-          <li><a class="nav-item scrolly active" href="#home">HOME</a></li>
-          <li><a class="nav-item scrolly" href="#story">STORY</a></li>
-          <li><a class="nav-item scrolly" href="#photo">PHOTO</a></li>
-          <li><a class="nav-item scrolly" href="#history">HISTORY</a></li>
-          <li><a class="nav-item scrolly" href="#about">ABOUT</a></li>
-          <li><a class="nav-item scrolly" href="#contact">CONTACT</a></li>
+          <li><a class="header-navbar__nav-item header-navbar__nav-item--active scrollTo" href="#home">HOME</a></li>
+          <li><a class="header-navbar__nav-item scrollTo" href="#story">STORY</a></li>
+          <li><a class="header-navbar__nav-item scrollTo" href="#menu">MENU</a></li>
+          <li><a class="header-navbar__nav-item scrollTo" href="#photo">PHOTO</a></li>
+          <li><a class="header-navbar__nav-item scrollTo" href="#history">HISTORY</a></li>
+          <li><a class="header-navbar__nav-item scrollTo" href="#about">ABOUT</a></li>
+          <li><a class="header-navbar__nav-item scrollTo" href="#contact">CONTACT</a></li>
         </ul>
       </nav>
     </header>
 
-    <!-- Main -->
-    <section id="home">
-      <div class="carousel switch" data-interval="3000" id="carousel">
-        <button class="carousel-arrow prev">&#8249;</button>
-        <button class="carousel-arrow next">&#8250;</button>
-        <div class="carousel-overlay"></div>
-        <ul class="carousel-container">
-          <li><img src="images/main_01.jpg"></img></li>
-          <li><img src="images/main_02.jpeg"></img></li>
-          <li><img src="images/main_03.jpg"></img></li>
-          <li><img src="images/main_04.jpg"></img></li>
-          <li><img src="images/main_05.png"></img></li>
-          <li><img src="images/main_06.webp"></img></li>
-        </div>
-      </div>
-      <div class="container text-center">
-        <span class="cursive">Welcome to</span>
+    <!-- Home -->
+    <section id="home" class="carousel fade auto" data-interval="3000">
+      <div class="carousel-overlay"></div>
+      <div class="carousel-content">
+        <i>Welcome to</i>
         <h1>COFFEE BRICK</h1>
         <p>The best Korean style cafe in Waterloo</p>
+        <a class="carousel-content__arrow--prev">&#8249;</a>
+        <a class="carousel-content__arrow--next">&#8250;</a>
+        <a class="carousel-content__button scrollTo" href="#story">FIND MORE</a>
       </div>
-      <a class="button scrolly" href="#story">FIND MORE</a>
+      <ul class="carousel-spinner">
+        <li><img src="images/main_01.jpg"></img></li>
+        <li><img src="images/main_02.jpeg"></img></li>
+        <li><img src="images/main_03.jpg"></img></li>
+        <li><img src="images/main_04.jpg"></img></li>
+        <li><img src="images/main_05.png"></img></li>
+        <li><img src="images/main_06.webp"></img></li>
+      </ul>
     </section>
 
     <!-- Story -->
-    <section id="story" style="background-color:skyblue">
+    <section id="story">
       <h1>Story</h1>
     </section>
 
+    <!-- Menu -->
+    <section id="menu">
+      <h1>Menu</h1>
+    </section>
+
     <!-- Instagram -->
-    <section id="photo" style="background-color:lightgreen">
+    <section id="photo">
       <h1>Instagram</h1>
     </section>
 
     <!-- History -->
-    <section id="history" style="background-color:lightsalmon">
+    <section id="history">
       <h1>History</h1>
     </section>
 
     <!-- About -->
-    <section id="about" style="background-color:yellow">
+    <section id="about">
       <h1>About</h1>
     </section>
 
     <!-- Contact -->
-    <section id="contact" style="background-color:green">
+    <section id="contact">
       <h1>Contact</h1>
     </section>
 
     <!-- Footer -->
-    <section style="background-color:gray">
+    <footer>
       <h1>Footer</h1>
-    </section>
+    </footer>
   </body>
 </html>

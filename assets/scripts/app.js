@@ -1,143 +1,156 @@
 window.addEventListener("DOMContentLoaded", function() {
-  
-  // carousel
-  {
-    const carousel = this.document.getElementById("carousel") || {}; 
-    if (carousel) {
-      const container = carousel.getElementsByClassName("carousel-container")[0];
-      const autoplay = carousel.classList.contains("autoplay");
-      const list = container.getElementsByTagName("li");
-      
-      let timerId, forward, backward;
-
-      const defaultInterval = 3000;
-      const timerInterval = carousel.dataset.interval != undefined ? carousel.dataset.interval : defaultInterval;
-      
-      const spin = (direction) => {
-        direction();
-        autoplay && this.clearInterval(timerId);
-        if (autoplay) {
-          carousel.direction = direction;
-          timerId = this.setInterval(direction, timerInterval);
-        }
-      }
-      
-      // switch mode
-      if (carousel.classList.contains('switch')) {
-        let prevIndex = 0;
-        let currentIndex = 0;
-        const fadeTransition = (element, opacity) => {
-          element.style.opacity = opacity;
-          element.classList.add("fade-transition");
-          this.setTimeout(() => {
-            element.classList.remove("fade-transition");
-          }, 500);
-        }
-        forward = () => {
-          prevIndex = currentIndex;
-          currentIndex = (currentIndex + 1) % list.length;
-          fadeTransition(list[prevIndex], 0);
-          fadeTransition(list[currentIndex], 1);
-        }
-        backward = () => {
-          prevIndex = currentIndex;
-          currentIndex = (currentIndex - 1 + list.length) % list.length;
-          fadeTransition(list[prevIndex], 0);
-          fadeTransition(list[currentIndex], 1);
-        }
-      }
-
-      // slide mode
-      else {
-        forward = () => {
-          container.classList.add("sliding-transition");
-          container.style.transform = "translateX(-100%)";
-          this.setTimeout(() => {
-            container.appendChild(list[0]);
-            container.classList.remove("sliding-transition");
-            container.style.transform = "";
-          }, 500);
-        }
-        backward = () => {
-          container.insertBefore(list[list.length - 1], container.firstChild);
-          container.style.transform = "translateX(-100%)";
-          this.setTimeout(() => {
-            container.classList.add("sliding-transition");
-            container.style.transform = "";
-          }, 10);
-          this.setTimeout(() => {
-            container.classList.remove("sliding-transition");
-          }, 490);
-        }
-      }
-      carousel.getElementsByClassName("next")[0].addEventListener("click", () => { spin(forward); });
-      carousel.getElementsByClassName("prev")[0].addEventListener("click", () => { spin(backward); });
-
-      // Start autoplay and interection observer
-      if (autoplay) {
-        const observer = new IntersectionObserver(entries => {
-          if (entries[0].isIntersecting) {
-            if (!carousel.direction) {
-              carousel.direction = forward;
-            }
-            timerId = this.setInterval(carousel.direction, timerInterval);
-          }
-          else { autoplay && this.clearInterval(timerId); }
-        });
-        observer.observe(carousel);
-      }
+  // event listener function
+  const on = (type, el, listener) => {
+    if(Array.isArray(el)) {
+      el.forEach(e => e.addEventListener(type, listener));      
+    } else {
+      el.addEventListener(type, listener);
     }
   }
 
   // header
   const header = this.document.getElementById("header");
   if (header) {
-    
-    // header scrolled
-    const headerScrolled = () => {
-      if (this.window.scrollY > header.offsetHeight) {
-        header.classList.add("header-scrolled");
-      }
-      else {
-        header.classList.remove("header-scrolled");
-      }
-    }
-    this.document.addEventListener("scroll", headerScrolled);
-
     // navbar
-    const navbar = this.document.getElementById("navbar");
-    if (navbar) {
-      const links = this.document.getElementsByClassName("nav-item");
+    const navList = header.getElementsByClassName("header-navbar__nav-item");
+    if (navList && navList.length > 0) {
       const navAction = () => {
-        const position = window.scrollY + header.offsetHeight + 1;
-        for (let link of links) {
-          if (!link.hash) continue;
-          let target = this.document.getElementById(link.hash.substring(1));
+        const position = window.scrollY + header.offsetHeight;
+        for (let nav of navList) {
+          if (!nav.hash) continue;
+          let target = this.document.getElementById(nav.hash.substring(1));
           if (!target) continue;
           if (position >= target.offsetTop && position <= (target.offsetTop + target.offsetHeight)) {
-            link.classList.add("active");
+            nav.classList.add("header-navbar__nav-item--active");
           }
           else {
-            link.classList.remove("active");
+            nav.classList.remove("header-navbar__nav-item--active");
           }
         } 
       };
-      this.document.addEventListener("scroll", navAction);
+      on("scroll", this.document, navAction);
     }
+  }
 
-    // scrolly
-    const scrolls = this.document.getElementsByClassName("scrolly");
-    for (let item of scrolls) {
-      if (!item.hash) continue;
-      const target = this.document.getElementById(item.hash.substring(1));
-      if (!target) continue;
-      item.addEventListener("click", e => {
-        e.preventDefault();
-        this.window.scrollTo({
-          top: target.offsetTop - header.offsetHeight,
-          behavior: "smooth"
-        });
-      });
+  
+  // topbar
+  const topbar = this.document.getElementById("topbar")
+  if (header || topbar) {
+    const topbarScrolled = () => {
+      if (this.window.scrollY > 100) {
+        header && header.classList.add("header--scrolled")
+        topbar && topbar.classList.add("topbar--scrolled");
+      } else {
+        header && header.classList.remove("header--scrolled");
+        topbar && topbar.classList.remove("topbar--scrolled");
+      }
     }
+    on("scroll", this.document, topbarScrolled);
+  }
+
+
+  // carousel
+  const carouselList = this.document.getElementsByClassName("carousel");
+  for (let carousel of carouselList) {
+    const spinner = carousel.getElementsByClassName("carousel-spinner")[0];
+    const auto = carousel.classList.contains("auto");
+    const list = spinner.getElementsByTagName("li");
+    if (list.length <= 1) continue;
+
+    let timer, forward, backward;
+    let interval = carousel.dataset.interval != undefined ? carousel.dataset.interval : 3000; // default 3000
+    const spin = (action) => {
+      action();
+      if (auto) {
+        carousel.action = action;
+        this.clearInterval(timer);
+        timer = this.setInterval(action, interval);
+      }
+    }  
+    const fade = (element, opacity) => {
+      element.style.opacity = opacity;
+      element.classList.add("carousel-spinner__transition--fade");
+      this.setTimeout(() => {
+        element.classList.remove("carousel-spinner__transition--fade");
+      }, 500);
+    }
+    
+    // fade
+    if (carousel.classList.contains("fade")) {
+      let prevIndex = 0;
+      let currentIndex = 0;
+      forward = () => {
+        prevIndex = currentIndex;
+        currentIndex = (currentIndex + 1) % list.length;
+        fade(list[prevIndex], 0);
+        fade(list[currentIndex], 1);
+      }
+      backward = () => {
+        prevIndex = currentIndex;
+        currentIndex = (currentIndex - 1 + list.length) % list.length;
+        fade(list[prevIndex], 0);
+        fade(list[currentIndex], 1);
+      }
+    }
+    
+    // slide
+    else {
+      forward = () => {
+        spinner.classList.add("carousel-spinner__transition--slide");
+        spinner.style.transform = "translateX(-100%)";
+        this.setTimeout(() => {
+          spinner.appendChild(list[0]);
+          spinner.classList.remove("carousel-spinner__transition--slide");
+          spinner.style.transform = "";
+        }, 500);
+      }
+      backward = () => {
+        spinner.insertBefore(list[list.length - 1], spinner.firstChild);
+        spinner.style.transform = "translateX(-100%)";
+        this.setTimeout(() => {
+          spinner.classList.add("carousel-spinner__transition--slide");
+          spinner.style.transform = "";
+        }, 10);
+        this.setTimeout(() => {
+          spinner.classList.remove("carousel-spinner__transition--slide");
+        }, 490);
+      }
+    }
+    
+    // Add button listener
+    const next = carousel.getElementsByClassName("carousel-content__arrow--next")[0];
+    const prev = carousel.getElementsByClassName("carousel-content__arrow--prev")[0];
+    on("click", prev, () => { spin(backward); });
+    on("click", next, () => { spin(forward); });
+
+    // autoplay and observation
+    if (auto) {
+      const observer = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          if (!carousel.action) {
+            carousel.action = forward;
+          }
+          timer = this.setInterval(carousel.action, interval);
+        }
+        else { auto && this.clearInterval(timer); }
+      });
+      observer.observe(carousel);
+    }
+  }
+
+  // scrollTo
+  const scrollList = this.document.getElementsByClassName("scrollTo");
+  for (let item of scrollList) {
+    if (!item.hash) continue;
+    const target = this.document.getElementById(item.hash.substring(1));
+    if (!target) continue;
+    item.addEventListener("click", e => {
+      e.preventDefault();
+      const offset = header != null ? header.offsetHeight : 0;
+      this.window.scrollTo({
+        top: target.offsetTop + 1 - offset,   // with border 1px solid
+        behavior: "smooth"
+      });
+    });
   }
 });
