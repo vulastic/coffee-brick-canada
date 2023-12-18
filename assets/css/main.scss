@@ -170,9 +170,11 @@ Responsive screen size
   }
   @include mobile() {
     max-width: 720px;
+    font-size: 75%;
   }
   @include small() {
     max-width: 540px;
+    font-size: 60%;
   }
 }
 /*=================================================
@@ -247,11 +249,28 @@ Responsive screen size
     }
   }
 
-  &-language {
-    list-style: none;
+  @include mobile() {
+    font-size: 12px;
+
+    &-container {
+      justify-content: center;
+    }
+  }
+
+  @include tiny() {
+    font-size: 10px;
+  }
+}
+
+/*=================================================
+    Language Selector
+=================================================*/
+.language-selector {
+  list-style: none;
 
     & > li {
       display: inline-block;
+
       & > a {
         color: $color-text;
         text-decoration: none;
@@ -259,6 +278,7 @@ Responsive screen size
           color: $color-accent;
         }
       }
+
       &:nth-child(even) {
         padding: 0 .5em;
         font-size: 12px;
@@ -268,22 +288,17 @@ Responsive screen size
     &--active {
       color: $color-prime!important;
     }
+
+  &--mobile {
+    display: none;
   }
 
   @include mobile() {
-    font-size: 12px;
-
-    &-container {
-      justify-content: center;
+    display: none;
+    
+    &--mobile {
+      display: block;
     }
-
-    &-language {
-      display: none;
-    }
-  }
-
-  @include tiny() {
-    font-size: 10px;
   }
 }
 
@@ -307,12 +322,13 @@ Responsive screen size
   
   &-navbar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 
     &__brand {
-      width: auto;
-      height: 60%;
+      height: 42px;
+      padding: 14px;
   
       & > img {
         @include image-fullsize;
@@ -320,29 +336,31 @@ Responsive screen size
       }
     }
 
-    & > ul {
-      list-style: none;
-      & > li {
-        display: inline-block;
-      }
-    }
-
-    &__nav-item {
-      padding-left: min(1.6vw, 30px);
-      color: $color-text;
-      font-size: 16px;
-      text-decoration: none;
-      &:hover {
-        color: $color-accent;
-      }
-
-      &--active {
-        color: $color-prime;
-      }
-    }
-
     &__menu {
+      display: flex;
+      list-style: none;
+      
+      &-item {
+        padding-left: min(1.6vw, 30px);
+        color: $color-text;
+        font-size: 16px;
+        text-decoration: none;
+        &:hover:not(.language-selector) {
+          color: $color-accent;
+        }
+
+        &--active {
+          color: $color-prime;
+        }
+      }
+    }
+
+    &__menu-toggle {
       display: none;
+      border: none;
+      color: $color-text;
+      background-color: transparent;
+      font-size: 1rem;
       &:hover {
         color: $color-accent;
       }
@@ -351,13 +369,36 @@ Responsive screen size
 
   @include mobile() {
     height: 40px;
+    max-height: 40px;
+    overflow: hidden;
+
+    &--mobile {
+      height: auto;
+      max-height: 100%;
+      background-color: $color-back;
+    }
 
     &-navbar {
-      &__nav-item {
-        display: none;
+      &__brand {
+        height: 24px;
+        padding: 8px;
       }
+
       &__menu {
-        display: inline-block;
+        flex-direction: column;
+        flex-basis: 100%;
+
+        & > li {
+          padding: 1.5em;
+        }
+
+        &-item {
+          display: inline-block;
+          width: 100%;
+        }
+      }
+      &__menu-toggle {
+        display: block;
       }
     }
   }
