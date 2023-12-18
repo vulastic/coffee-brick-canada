@@ -2,24 +2,6 @@
     Cafe Brick by HTML5
     author: vulastic
 */
-/*
-  Set root
-*/
-:root {
-  --text: #FEF5EF;
-  --background: #100d05;
-  --background-transparent: rgba(16, 13, 5, 0.5);
-  --prime: #B68D40;
-  --second: #F4EBD0;
-  --accent: #804330;
-  --font-text: "Poppins", "IBM Plex Sans KR", sans-serif;
-  --font-bold: "Josefin Sans", "IBM Plex Sans KR", sans-serif;
-  --font-italic: "Kaushan Script", "IBM Plex Sans KR", cursive;
-}
-
-/*
-  Reset html tags
-*/
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
@@ -34,14 +16,11 @@ section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
+  font-size: 100%;
   vertical-align: baseline;
 }
 
-/*
-  Tag defaults
-*/
 html {
   scroll-behavior: smooth;
 }
@@ -49,28 +28,65 @@ html {
 body {
   -ms-overflow-style: none;
   background: url(./images/blackboard.webp) no-repeat fixed;
-  color: var(--text);
-  font-family: var(--font-text);
+  background-size: cover;
+  font-family: "Poppins", "IBM Plex Sans KR", sans-serif;
+  color: #FEF5EF;
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
 
-section {
-  display: block;
+header, section, footer {
   width: 100%;
-  height: 50vh;
+  height: 100vh;
 }
 
+/*=================================================
+Responsive screen size
+=================================================*/
+.container {
+  box-sizing: border-box;
+  max-width: 1320px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+@media (max-width: 1199px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+@media (max-width: 991px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (max-width: 767px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (max-width: 575px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+/*=================================================
+    Loading screen
+=================================================*/
 #loading {
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: var(--background);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #100d05;
   z-index: 100;
 }
 #loading > img {
@@ -78,8 +94,8 @@ section {
 }
 
 #title {
-  margin-top: 50px;
-  transition: all 0.5s ease;
+  margin-top: 10vh;
+  transition: all 0.5s;
   opacity: 0;
 }
 #title.title--loaded {
@@ -87,32 +103,37 @@ section {
   opacity: 1;
 }
 
+/*=================================================
+    Topbar
+=================================================*/
 .topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  top: 0px;
   height: 30px;
-  padding: 0 20px;
-  transition: top 0.5s ease-in-out;
+  position: fixed;
+  font-size: 14px;
+  transition: top 0.5s;
   z-index: 3;
 }
 .topbar--scrolled {
   top: -30px;
+}
+.topbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .topbar-info {
   list-style: none;
 }
 .topbar-info > li {
   display: inline-block;
-  padding-right: 1rem;
+}
+.topbar-info > li:nth-child(1) {
+  padding-right: 1em;
 }
 .topbar-info > li > i {
-  padding-right: 0.5rem;
-  color: var(--prime);
+  padding-right: 0.5em;
+  color: #B68D40;
 }
 .topbar-language {
   list-style: none;
@@ -121,46 +142,61 @@ section {
   display: inline-block;
 }
 .topbar-language > li > a {
-  color: var(--text);
+  color: #FEF5EF;
   text-decoration: none;
 }
 .topbar-language > li > a:hover {
-  color: var(--accent);
+  color: #804330;
 }
 .topbar-language > li:nth-child(even) {
-  padding: 0 10px;
-  font-size: 0.75rem;
+  padding: 0 0.5em;
+  font-size: 12px;
 }
 .topbar-language--active {
-  color: var(--prime) !important;
+  color: #B68D40 !important;
+}
+@media (max-width: 767px) {
+  .topbar {
+    font-size: 12px;
+  }
+  .topbar-container {
+    justify-content: center;
+  }
+  .topbar-language {
+    display: none;
+  }
+}
+@media (max-width: 319px) {
+  .topbar {
+    font-size: 10px;
+  }
 }
 
-/*
-  Header
-*/
+/*=================================================
+    Header
+=================================================*/
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
   position: fixed;
   top: 30px;
-  width: 100%;
   height: 70px;
-  padding: 0 5vh;
-  transition: all 0.5s ease-in-out;
-  background-color: var(--background-transparent);
+  background-color: rgba(16, 13, 5, 0.5019607843);
+  transition: all 0.5s;
   z-index: 3;
 }
 .header--scrolled {
   top: 0px;
-  background-color: var(--background);
+  background-color: #100d05;
 }
-.header-brand {
+.header-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-navbar__brand {
   width: auto;
-  height: 65%;
+  height: 60%;
 }
-.header-brand > img {
+.header-navbar__brand > img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -174,23 +210,40 @@ section {
   display: inline-block;
 }
 .header-navbar__nav-item {
-  padding: 1.5rem 0 1.5rem 3rem;
-  color: var(--text);
+  padding-left: min(1.6vw, 30px);
+  color: #FEF5EF;
   font-size: 16px;
   text-decoration: none;
 }
 .header-navbar__nav-item:hover {
-  color: var(--accent);
+  color: #804330;
 }
 .header-navbar__nav-item--active {
-  color: var(--prime);
+  color: #B68D40;
+}
+.header-navbar__menu {
+  display: none;
+}
+.header-navbar__menu:hover {
+  color: #804330;
+}
+@media (max-width: 767px) {
+  .header {
+    height: 40px;
+  }
+  .header-navbar__nav-item {
+    display: none;
+  }
+  .header-navbar__menu {
+    display: inline-block;
+  }
 }
 
 /*
   Carousel
 */
 .carousel {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
 }
@@ -198,7 +251,7 @@ section {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: var(--background);
+  background-color: #100d05;
   opacity: 0.4;
   z-index: 2;
 }
@@ -220,16 +273,15 @@ section {
   text-align: center;
 }
 .carousel-content__title > i {
-  margin-bottom: 10px;
-  color: var(--prime);
-  font-family: var(--font-italic);
-  font-size: 3rem;
+  color: #B68D40;
+  font-family: "Kaushan Script", "IBM Plex Sans KR", cursive;
+  font-size: 2.75rem;
 }
 .carousel-content__title > h1 {
   margin-bottom: 20px;
-  font-family: var(--font-bold);
+  font-family: "Josefin Sans", "IBM Plex Sans KR", sans-serif;
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2.75rem;
 }
 .carousel-content__title > p {
   margin-bottom: 100px;
@@ -239,7 +291,7 @@ section {
   font-size: 5rem;
   cursor: pointer;
   opacity: 0.3;
-  transition: opacity 0.2s;
+  transition: opacity 0.3s;
   -ms-grid-column: 1;
   -ms-grid-row: 2;
   grid-column: 1;
@@ -254,7 +306,7 @@ section {
   font-size: 5rem;
   cursor: pointer;
   opacity: 0.3;
-  transition: opacity 0.2s;
+  transition: opacity 0.3s;
   -ms-grid-column: 3;
   -ms-grid-row: 2;
   grid-column: 3;
@@ -267,14 +319,14 @@ section {
 }
 .carousel-content__button {
   padding: 0.4rem 0.75rem;
-  border: 3px solid var(--prime);
+  border: 3px solid #B68D40;
   border-radius: 10px;
-  background-color: var(--prime);
+  background-color: #B68D40;
   color: white;
-  font-family: var(--font-text);
+  font-family: "Poppins", "IBM Plex Sans KR", sans-serif;
   text-align: center;
   text-decoration: none;
-  transition: transparent 0.3s;
+  transition: background-color 0.3s;
   cursor: pointer;
   -ms-grid-column: 2;
   -ms-grid-row: 3;
@@ -305,7 +357,7 @@ section {
   transition: transform 0.5s ease-in-out;
 }
 .carousel-spinner__transition--fade {
-  transition: opacity 0.5s linear;
+  transition: opacity 0.5s;
 }
 .carousel.fade .carousel-spinner > li {
   position: absolute;
@@ -313,4 +365,12 @@ section {
 }
 .carousel.fade .carousel-spinner > li:nth-child(1) {
   opacity: 1;
+}
+@media (max-width: 767px) {
+  .carousel-content {
+    grid-template-columns: 10px auto 10px;
+  }
+  .carousel-content__prev, .carousel-content__next {
+    display: none;
+  }
 }/*# sourceMappingURL=main.css.map */
