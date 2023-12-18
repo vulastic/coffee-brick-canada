@@ -20,6 +20,11 @@
   </head>
 
   <body>
+    <!-- Loading -->
+    <div id="loading">
+      <img src="images/loading.svg" alt="loading">
+    </div>
+
     <!-- Topbar -->
     <div id="topbar" class="topbar">
       <ul class="topbar-info">
@@ -53,11 +58,13 @@
     <section id="home" class="carousel fade auto" data-interval="3000">
       <div class="carousel-overlay"></div>
       <div class="carousel-content">
-        <i>Welcome to</i>
-        <h1>COFFEE BRICK</h1>
-        <p>The best Korean style cafe in Waterloo</p>
-        <a class="carousel-content__arrow--prev">&#8249;</a>
-        <a class="carousel-content__arrow--next">&#8250;</a>
+        <div id="title" class="carousel-content__title">
+          <i>Welcome to</i>
+          <h1>COFFEE BRICK</h1>
+          <p>The best Korean style cafe in Waterloo</p>
+        </div>
+        <a class="carousel-content__prev">&#8249;</a>
+        <a class="carousel-content__next">&#8250;</a>
         <a class="carousel-content__button scrollTo" href="#story">FIND MORE</a>
       </div>
       <ul class="carousel-spinner">

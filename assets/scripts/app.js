@@ -1,4 +1,13 @@
-window.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("load", () => {
+  this.setTimeout(() => {
+    const loading = this.document.getElementById("loading");
+    loading.style.display = 'none';
+    const title = this.document.getElementById("title");
+    title.classList.add("title--loaded");
+  }, 200);
+});
+
+window.addEventListener("DOMContentLoaded", () => {
   // event listener function
   const on = (type, el, listener) => {
     if(Array.isArray(el)) {
@@ -32,7 +41,7 @@ window.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  
+
   // topbar
   const topbar = this.document.getElementById("topbar")
   if (header || topbar) {
@@ -118,8 +127,8 @@ window.addEventListener("DOMContentLoaded", function() {
     }
     
     // Add button listener
-    const next = carousel.getElementsByClassName("carousel-content__arrow--next")[0];
-    const prev = carousel.getElementsByClassName("carousel-content__arrow--prev")[0];
+    const next = carousel.getElementsByClassName("carousel-content__next")[0];
+    const prev = carousel.getElementsByClassName("carousel-content__prev")[0];
     on("click", prev, () => { spin(backward); });
     on("click", next, () => { spin(forward); });
 
