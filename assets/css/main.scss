@@ -5,11 +5,17 @@
 //=================================================
 //    Media query
 //=================================================
-$laptop: 1199px;
-$tablet: 991px;
-$mobile: 767px;
-$small: 575px;
-$tiny: 319px;
+$desktop: 1199px;
+$laptop: 991px;
+$tablet: 767px;
+$mobile: 575px;
+$small: 319px;
+
+@mixin desktop {
+  @media (max-height: #{$desktop}) {
+    @content;
+  }
+}
 
 @mixin laptop {
   @media (max-width: #{$laptop}) {
@@ -35,12 +41,6 @@ $tiny: 319px;
   }
 }
 
-@mixin tiny {
-  @media (max-width: #{$tiny}) {
-    @content;
-  }
-}
-
 //=================================================
 //    Root values
 //=================================================
@@ -53,24 +53,6 @@ $color-accent: #804330;
 $font-text: 'Poppins', 'IBM Plex Sans KR', sans-serif;
 $font-bold: 'Josefin Sans', 'IBM Plex Sans KR', sans-serif;
 $font-italic: 'Kaushan Script', 'IBM Plex Sans KR', cursive;
-
-
-//=================================================
-//    default mixin
-//=================================================
-@mixin text-size-title {
-  font-size: 2.75rem;
-}
-
-@mixin text-size-body {
-  font-size: 1.25rem;
-}
-
-@mixin image-fullsize {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 //=================================================
 //    style button mixin
@@ -97,7 +79,6 @@ $font-italic: 'Kaushan Script', 'IBM Plex Sans KR', cursive;
   border: none;
   color: $color-prime;
   font-family: $color-text;
-  font-size: 100%;
   text-align: center;
   text-decoration: none;
   cursor: pointer; 
@@ -123,8 +104,7 @@ section, summary, time, mark, audio, video {
   margin: 0;
 	padding: 0;
 	border: 0;
-	font: inherit;
-	font-size: 100%;
+  font:inherit;
 	vertical-align: baseline;
 }
 
@@ -149,9 +129,28 @@ header, section, footer {
   height: 100vh;
 }
 
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /*=================================================
 Responsive screen size
 =================================================*/
+html {
+  font-size: 100%;
+  @include tablet() {
+    font-size: 87.5%;
+  }
+  @include mobile() {
+    font-size: 75%;
+  }
+  @include small() {
+    font-size: 62.5%;
+  }
+}
+
 .container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -162,19 +161,17 @@ Responsive screen size
   margin: 0 auto;
   padding: 0 12px;
 
-  @include laptop() {
+  @include desktop() {
     max-width: 1140px;
   }
-  @include tablet() {
+  @include laptop() {
     max-width: 960px;
   }
-  @include mobile() {
+  @include tablet() {
     max-width: 720px;
-    font-size: 75%;
   }
-  @include small() {
+  @include mobile() {
     max-width: 540px;
-    font-size: 60%;
   }
 }
 /*=================================================
@@ -193,6 +190,7 @@ Responsive screen size
   z-index: 100;
   & > img {
     width: 100px;
+    height: 100px;
   }
 }
 
@@ -216,7 +214,7 @@ Responsive screen size
   top: 0px;
   height: 30px;
   position: fixed;
-  font-size: 14px;
+  font-size: 0.875rem;
   -webkit-transition: top 0.5s;
   -moz-transition: top 0.5s;
   transition: top 0.5s;
@@ -239,26 +237,21 @@ Responsive screen size
       display: inline-block;
 
       &:nth-child(1) {
-        padding-right: 1em;
+        padding-right: 1rem;
       }
 
       & > i {
-        padding-right: .5em;
+        padding-right: .5rem;
         color: $color-prime;
       }
     }
   }
 
-  @include mobile() {
-    font-size: 12px;
-
+  @include tablet() {
+    font-size: 1rem;
     &-container {
       justify-content: center;
     }
-  }
-
-  @include tiny() {
-    font-size: 10px;
   }
 }
 
@@ -280,8 +273,8 @@ Responsive screen size
       }
 
       &:nth-child(even) {
-        padding: 0 .5em;
-        font-size: 12px;
+        padding: 0 .5rem;
+        font-size: 0.75rem;
       }
     }
     
@@ -293,9 +286,9 @@ Responsive screen size
     display: none;
   }
 
-  @include mobile() {
+  @include tablet() {
     display: none;
-    
+
     &--mobile {
       display: block;
     }
@@ -331,7 +324,6 @@ Responsive screen size
       padding: 14px;
   
       & > img {
-        @include image-fullsize;
         filter: invert(1);
       }
     }
@@ -341,9 +333,8 @@ Responsive screen size
       list-style: none;
       
       &-item {
-        padding-left: min(1.6vw, 30px);
+        padding-left: min(2vw, 30px);
         color: $color-text;
-        font-size: 16px;
         text-decoration: none;
         &:hover:not(.language-selector) {
           color: $color-accent;
@@ -367,7 +358,7 @@ Responsive screen size
     }
   }
 
-  @include mobile() {
+  @include tablet() {
     height: 40px;
     max-height: 40px;
     overflow: hidden;
@@ -389,7 +380,13 @@ Responsive screen size
         flex-basis: 100%;
 
         & > li {
-          padding: 1.5em;
+          padding-top: 2rem;
+          padding-right: 1.5rem;
+          padding-left: 1.5rem;
+        }
+
+        & > li:nth-last-child(1) {
+          padding-bottom: 1.5rem;
         }
 
         &-item {
@@ -440,17 +437,17 @@ Responsive screen size
       & > i {
         color: $color-prime;
         font-family: $font-italic;
-        @include text-size-title;
+        font-size: 3.25rem;
       }
       & > h1 {
         margin-bottom: 20px;
         font-family: $font-bold;
         font-weight: bold;
-        @include text-size-title;
+        font-size: 3.25rem;
       }
       & > p {
         margin-bottom: 100px;
-        @include text-size-body;
+        font-size: 1.25rem;
       }
     }
 
@@ -503,10 +500,6 @@ Responsive screen size
       flex: 1 0 100%;
       width: 100%;
       height: 100%;
-
-      & > img {
-        @include image-fullsize;
-      }
     }
 
     &__transition {
@@ -533,7 +526,7 @@ Responsive screen size
     }
   }
 
-  @include mobile() {
+  @include tablet() {
     &-content {
       grid-template-columns: 10px auto 10px;
 
