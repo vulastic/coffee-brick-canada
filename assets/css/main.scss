@@ -12,7 +12,7 @@ $mobile: 575px;
 $small: 319px;
 
 @mixin desktop {
-  @media (max-height: #{$desktop}) {
+  @media (max-width: #{$desktop}) {
     @content;
   }
 }
@@ -45,10 +45,11 @@ $small: 319px;
 //    Root values
 //=================================================
 $color-text: #FEF5EF;
-$color-back: #100d05;
+$color-back: #141111;
 $color-back-alpha: #100d0580;
-$color-prime: #B68D40;
-$color-second: #F4EBD0;
+$color-back-dark: #100d05cc;
+$color-prime: #b68d40;
+$color-second: #be9d6b;
 $color-accent: #804330;
 $font-text: 'Poppins', 'IBM Plex Sans KR', sans-serif;
 $font-bold: 'Josefin Sans', 'IBM Plex Sans KR', sans-serif;
@@ -87,6 +88,10 @@ $font-italic: 'Kaushan Script', 'IBM Plex Sans KR', cursive;
   };
 }
 
+@mixin temp {
+  background-color: $color-second;
+}
+
 //=================================================
 //    Reset HTML
 //=================================================
@@ -101,6 +106,9 @@ tfoot, thead, tr, th, td, article, aside,
 canvas, details, embed, figure, figcaption,
 footer, header, hgroup, menu, nav, output, ruby,
 section, summary, time, mark, audio, video {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
 	padding: 0;
 	border: 0;
@@ -126,7 +134,6 @@ body {
 
 header, section, footer {
   width: 100%;
-  height: 100vh;
 }
 
 img {
@@ -155,25 +162,12 @@ html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  max-width: 1320px;
+  max-width: 1920px;
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  padding: 0 12px;
-
-  @include desktop() {
-    max-width: 1140px;
-  }
-  @include laptop() {
-    max-width: 960px;
-  }
-  @include tablet() {
-    max-width: 720px;
-  }
-  @include mobile() {
-    max-width: 540px;
-  }
 }
+
 /*=================================================
     Loading screen
 =================================================*/
@@ -212,6 +206,7 @@ html {
 =================================================*/
 .topbar {
   top: 0px;
+  width: 100%;
   height: 30px;
   position: fixed;
   font-size: 0.875rem;
@@ -228,6 +223,7 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 2.5rem;
   }
 
   &-info {
@@ -306,7 +302,7 @@ html {
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
-  z-index: 3;
+  z-index: 5;
   
   &--scrolled {
     top: 0px;
@@ -318,10 +314,10 @@ html {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    padding: 0 2.5rem;
 
     &__brand {
       height: 42px;
-      padding: 14px;
   
       & > img {
         filter: invert(1);
@@ -362,33 +358,27 @@ html {
     height: 40px;
     max-height: 40px;
     overflow: hidden;
-
-    &--mobile {
+    
+    &--expanded {
       height: auto;
       max-height: 100%;
       background-color: $color-back;
     }
-
+    
     &-navbar {
       &__brand {
-        height: 24px;
-        padding: 8px;
+        height: 40px;
+        padding: 8px 0;
       }
 
       &__menu {
         flex-direction: column;
         flex-basis: 100%;
-
+        
         & > li {
-          padding-top: 2rem;
-          padding-right: 1.5rem;
-          padding-left: 1.5rem;
+          padding: 1.5rem;
         }
-
-        & > li:nth-last-child(1) {
-          padding-bottom: 1.5rem;
-        }
-
+        
         &-item {
           display: inline-block;
           width: 100%;
@@ -396,18 +386,26 @@ html {
       }
       &__menu-toggle {
         display: block;
+        & > p {
+          display: inline;
+          font-family: $font-text;
+        }
       }
     }
   }
 }
 
-/*
-  Carousel
-*/
+/*=================================================
+    Title and carousel
+=================================================*/
 .carousel {
-  width: 100vw;
   height: 100vh;
   overflow: hidden;
+
+  &-container {
+    position: relative;
+    padding: 0;
+  }
 
   &-overlay {
     position: absolute;
@@ -426,7 +424,7 @@ html {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 3;
 
     &__title {
       -ms-grid-column: 2;
@@ -535,4 +533,133 @@ html {
       }
     }
   }
+}
+
+/*=================================================
+    Story
+=================================================*/
+.story {
+  position: relative;
+  height: calc(100vh - 70px);
+
+  &-photo {
+    display: flex;
+    list-style-type: none;
+    width: 70%;
+    height: 100%;
+
+    & > li > img {
+      height: 80%;
+    }
+
+    & > li:nth-child(even) {
+      display: flex;
+      align-items:flex-end;
+      padding-left: 1rem;
+    }
+  }
+
+  &-content {
+    position: absolute;
+    top: 10%;
+    left: 60%;
+    margin-right: 1rem;
+    background-color: $color-back-dark;
+    padding: 1.5rem;
+
+    & > i {
+      padding-left: 0.5rem;
+      color: $color-prime;
+      font-family: $font-italic;
+      font-size: 1.5rem;
+    }
+
+    & > h2 {
+      margin-bottom: 1rem;
+      font-family: $font-bold;
+      font-size: 2rem;
+      font-weight: bold;
+      line-height: 1rem;
+    }
+  }
+
+  @include desktop() {
+    &-photo {
+      width: 70%;
+
+      & > li {
+        display: none;
+      }
+
+      & > li:nth-child(even) {
+        display: none;
+      }
+
+      & > li:nth-child(1) {
+        display: block;
+
+        & > img {
+          height: 100%;
+        }
+      }
+    }
+    &-content {
+      left: 50%;
+    }
+  }
+
+  @include tablet() {
+    height: calc(100vh - 40px);
+
+    &-photo {
+      width: 100%;
+    }
+    &-content {
+      top: 60%;
+      left: 5%;
+    }
+  }
+
+  @include mobile() {
+    &-photo {
+      width: 100%;
+      height: 65%;
+    }
+    &-content {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 35%;
+      margin: 0;
+    }
+  }
+}
+
+.menu {
+  @include temp;
+  height: 100vh;
+}
+
+.photo {
+  height: 100vh;
+}
+
+.history {
+  background-color: #1a1814;
+  height: 100vh;
+}
+
+.about {
+  @include temp;
+  height: 100vh;
+}
+
+.contact {
+  height: 100vh;
+}
+
+.footer {
+  @include temp;
+  height: 30vh;
 }

@@ -45,14 +45,14 @@ window.addEventListener("DOMContentLoaded", () => {
       // menu toggle
       const toggle = this.document.getElementById("menu-toggle");
       toggle && on("click", toggle, () => {
-        if (!header.classList.contains("header--mobile")) {
-          header.classList.add("header--mobile");
+        if (!header.classList.contains("header--expanded")) {
+          header.classList.add("header--expanded");
         } else {
-          header.classList.remove("header--mobile");
+          header.classList.remove("header--expanded");
         }
         // close menu when scrolling
         on("scroll", this.document, () => {
-          header.classList.remove("header--mobile");
+          header.classList.remove("header--expanded");
         })
       });
     }

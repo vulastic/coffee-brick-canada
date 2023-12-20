@@ -26,7 +26,7 @@
     </div>
 
     <!-- Topbar -->
-    <section id="topbar" class="topbar">
+    <div id="topbar" class="topbar">
       <div class="topbar-container container">
         <ul class="topbar-info">
           <li><i class="icon-phone"></i>+1 000-0000-0000</li>
@@ -38,18 +38,18 @@
           <li><a href="./ko/">한국어</a></li>
         </ul>
       </div>
-    </section>
+    </div>
 
     <!-- Header -->
     <header id="header" class="header">
       <nav class="header-navbar container">
         <a class="header-navbar__brand" href="#"><img src="./images/brand.svg"></a>
-        <button id="menu-toggle" class="header-navbar__menu-toggle icon-menu"> MENU</button>
+        <button id="menu-toggle" class="header-navbar__menu-toggle icon-menu"><p> MENU</p></button>
         <ul class="header-navbar__menu">
           <li><a class="header-navbar__menu-item header-navbar__menu-item--active scrollTo" href="#home">HOME</a></li>
-          <li><a class="header-navbar__menu-item scrollTo" href="#story">STORY</a></li>
+          <li><a class="header-navbar__menu-item scrollTo" href="#story">BRICK</a></li>
           <li><a class="header-navbar__menu-item scrollTo" href="#menu">MENU</a></li>
-          <li><a class="header-navbar__menu-item scrollTo" href="#photo">PHOTO</a></li>
+          <li><a class="header-navbar__menu-item scrollTo" href="#photo">GALLARY</a></li>
           <li><a class="header-navbar__menu-item scrollTo" href="#history">HISTORY</a></li>
           <li><a class="header-navbar__menu-item scrollTo" href="#about">ABOUT</a></li>
           <li><a class="header-navbar__menu-item scrollTo" href="#contact">CONTACT</a></li>
@@ -65,59 +65,81 @@
 
     <!-- Home -->
     <section id="home" class="carousel fade auto" data-interval="3000">
-      <div class="carousel-overlay"></div>
-      <div class="carousel-content">
-        <div id="title" class="carousel-content__title">
-          <i>Welcome to</i>
-          <h1>COFFEE BRICK</h1>
-          <p>The best Korean style cafe in Waterloo</p>
+      <div class="carousel-container container">
+        <div class="carousel-overlay"></div>
+        <div class="carousel-content">
+          <div id="title" class="carousel-content__title">
+            <i>Welcome to</i>
+            <h1>COFFEE BRICK</h1>
+            <p>The best Korean style cafe in Waterloo</p>
+          </div>
+          <a class="carousel-content__prev">&#8249;</a>
+          <a class="carousel-content__next">&#8250;</a>
+          <a class="carousel-content__button scrollTo" href="#story">FIND MORE</a>
         </div>
-        <a class="carousel-content__prev">&#8249;</a>
-        <a class="carousel-content__next">&#8250;</a>
-        <a class="carousel-content__button scrollTo" href="#story">FIND MORE</a>
+        <ul class="carousel-spinner">
+          <li><img src="images/main_01.jpg"></img></li>
+          <li><img src="images/main_02.jpeg"></img></li>
+          <li><img src="images/main_03.jpg"></img></li>
+          <li><img src="images/main_04.jpg"></img></li>
+          <li><img src="images/main_05.png"></img></li>
+          <li><img src="images/main_06.webp"></img></li>
+        </ul>
       </div>
-      <ul class="carousel-spinner">
-        <li><img src="images/main_01.jpg"></img></li>
-        <li><img src="images/main_02.jpeg"></img></li>
-        <li><img src="images/main_03.jpg"></img></li>
-        <li><img src="images/main_04.jpg"></img></li>
-        <li><img src="images/main_05.png"></img></li>
-        <li><img src="images/main_06.webp"></img></li>
-      </ul>
     </section>
 
     <!-- Story -->
-    <section id="story">
-      <h1>Story</h1>
+    <section id="story" class="story">
+      <div class="container">
+        <ul class="story-photo">
+          <li><img src="images/main_01.jpg"/></li>
+          <li><img src="images/main_03.jpg"/></li>
+        </ul>
+        <article class="story-content">
+          <i>The About of</i>
+          <h2>COFFEE BRICK</h2>
+          <p>This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.</p>
+        </article>
+      </div>
     </section>
 
     <!-- Menu -->
-    <section id="menu">
+    <section id="menu" class="menu">
       <h1>Menu</h1>
     </section>
 
     <!-- Instagram -->
-    <section id="photo">
+    <section id="photo" class="photo">
       <h1>Instagram</h1>
     </section>
 
     <!-- History -->
-    <section id="history">
+    <section id="history" class="history">
       <h1>History</h1>
     </section>
 
     <!-- About -->
-    <section id="about">
-      <h1>About</h1>
+    <section id="about" class="about">
+      <div class="container">
+        <ul class="about__images">
+          <li><img src="images/main_05.png"/></li>
+          <li><img src="images/main_06.webp"/></li>
+        </ul>
+        <article class="about__content">
+          <i>The Story of</i>
+          <h2>COFFEE BRICK</h2>
+          <p>This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.This is the infomation of coffee brick.</p>
+        </article>
+      </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact">
+    <section id="contact" class="contact">
       <h1>Contact</h1>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
       <h1>Footer</h1>
     </footer>
   </body>
