@@ -246,7 +246,7 @@ html {
     overflow: hidden;
   }
   .header--expanded {
-    height: auto;
+    height: calc(40px + 36rem);
     max-height: 100%;
     background-color: #141111;
   }
@@ -264,6 +264,7 @@ html {
   .header-navbar__menu-item {
     display: inline-block;
     width: 100%;
+    height: 1.5rem;
   }
   .header-navbar__menu-toggle {
     display: block;
@@ -408,27 +409,27 @@ html {
 }
 
 /*=================================================
-    Story
+    Brick
 =================================================*/
-.story {
+.brick {
   position: relative;
   height: calc(100vh - 70px);
 }
-.story-photo {
+.brick-photo {
   display: flex;
   list-style-type: none;
   width: 70%;
   height: 100%;
 }
-.story-photo > li > img {
+.brick-photo > li > img {
   height: 80%;
 }
-.story-photo > li:nth-child(even) {
+.brick-photo > li:nth-child(even) {
   display: flex;
   align-items: flex-end;
   padding-left: 1rem;
 }
-.story-content {
+.brick-content {
   position: absolute;
   top: 10%;
   left: 60%;
@@ -436,13 +437,13 @@ html {
   background-color: rgba(16, 13, 5, 0.8);
   padding: 1.5rem;
 }
-.story-content > i {
+.brick-content > i {
   padding-left: 0.5rem;
   color: #b68d40;
   font-family: "Kaushan Script", "IBM Plex Sans KR", cursive;
   font-size: 1.5rem;
 }
-.story-content > h2 {
+.brick-content > h2 {
   margin-bottom: 1rem;
   font-family: "Josefin Sans", "IBM Plex Sans KR", sans-serif;
   font-size: 2rem;
@@ -450,43 +451,43 @@ html {
   line-height: 1rem;
 }
 @media (max-width: 1199px) {
-  .story-photo {
+  .brick-photo {
     width: 70%;
   }
-  .story-photo > li {
+  .brick-photo > li {
     display: none;
   }
-  .story-photo > li:nth-child(even) {
+  .brick-photo > li:nth-child(even) {
     display: none;
   }
-  .story-photo > li:nth-child(1) {
+  .brick-photo > li:nth-child(1) {
     display: block;
   }
-  .story-photo > li:nth-child(1) > img {
+  .brick-photo > li:nth-child(1) > img {
     height: 100%;
   }
-  .story-content {
+  .brick-content {
     left: 50%;
   }
 }
 @media (max-width: 767px) {
-  .story {
+  .brick {
     height: calc(100vh - 40px);
   }
-  .story-photo {
+  .brick-photo {
     width: 100%;
   }
-  .story-content {
+  .brick-content {
     top: 60%;
     left: 5%;
   }
 }
 @media (max-width: 575px) {
-  .story-photo {
+  .brick-photo {
     width: 100%;
     height: 65%;
   }
-  .story-content {
+  .brick-content {
     position: relative;
     top: 0;
     left: 0;
@@ -510,11 +511,6 @@ html {
   height: 100vh;
 }
 
-.about {
-  background-color: #be9d6b;
-  height: 100vh;
-}
-
 .contact {
   height: 100vh;
 }
@@ -522,4 +518,14 @@ html {
 .footer {
   background-color: #be9d6b;
   height: 30vh;
+}
+
+/*=================================================
+    About
+=================================================*/
+.about {
+  height: calc(100vh - 70px);
+  background: url(./images/brick_back.jpg) center center;
+  background-size: cover;
+  background-attachment: fixed;
 }/*# sourceMappingURL=main.css.map */
