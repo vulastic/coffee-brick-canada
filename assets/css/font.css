@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'FontBrick';
+  src:  url('fonts/icomoon.ttf?jqe18h') format('truetype'),
+    url('fonts/icomoon.woff2?jqe18h') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
